@@ -161,7 +161,7 @@ func main() {
 
 	// Check the command line arguments.
 	if len(os.Args) > 2 {
-		fmt.Fprintf(os.Stderr, "usage: %s [alpnmitm.json]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "usage: %s [alpnpass.json]\n", os.Args[0])
 		return
 	}
 
@@ -169,7 +169,7 @@ func main() {
 	//log.SetFlags(log.Lshortfile)
 
 	// User can optionally provide a different config file.
-	filename := "alpnmitm.json"
+	filename := "alpnpass.json"
 	if len(os.Args) == 2 {
 		filename = os.Args[1]
 		log.Println("[main] Reading configuration file:", filename)

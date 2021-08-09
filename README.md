@@ -1,4 +1,4 @@
-ALPN MITM
+ALPN Pass
 ---------
 
 This tool will listen on a given port, strip SSL encryption, forward traffic through a plain TCP proxy, then encrypt the returning traffic again and send it to the target of your choice. Unlike most SSL stripping solutions this tool will negotiate ALPN and preserve the negotiated protocol all the way to the target.
@@ -13,9 +13,11 @@ Just run "go build" and everything should work automagically. There are no exter
 Usage
 -----
 
-./alpnmitm \[alpnmitm.json]
+```
+./alpnpass \[alpnpass.json]
+```
 
-The alpnmitm.json configuration file is currently the only way to configure this tool. You can specify any other filename of course. Here is an example with all default values:
+The alpnpass.json configuration file is currently the only way to configure this tool. You can specify any other filename of course. Here is an example with all default values:
 
 ```
 {
@@ -96,12 +98,12 @@ The alpnmitm.json configuration file is currently the only way to configure this
 
 If the configuration file cannot be read or some settings are missing, the above default values will be used. (Note that the default list of ciphers may differ from the one you see above, since it depends on the exact version of golang used to compile the tool).
 
-With the default configuration, alpnmitm will open TCP port 1111, receive SSL connections and negotiate ALPN. Then it will connect to any intercepting TCP proxy of your choice in plaintext on port 2222, and expect return connections on port 3333. When receiving the return connection, traffic will be SSL encrypted again and sent to port 4444, using the same ALPN negotiated protocol.
+With the default configuration, alpnpass will open TCP port 1111, receive SSL connections and negotiate ALPN. Then it will connect to any intercepting TCP proxy of your choice in plaintext on port 2222, and expect return connections on port 3333. When receiving the return connection, traffic will be SSL encrypted again and sent to port 4444, using the same ALPN negotiated protocol.
 
 For example, if you set the [IO Ninja](https://ioninja.com/) TCP proxy to listen on port 2222 and connect on port 3333, this will happen:
 
 ```
-client -> alpnmitm (port 1111, SSL) -> IO Ninja (port 2222, plain) -> alpnmitm (port 3333, plain) -> server (port 4444, SSL)
+client -> alpnpass (port 1111, SSL) -> IO Ninja (port 2222, plain) -> alpnpass (port 3333, plain) -> server (port 4444, SSL)
 ```
 
 Limitations

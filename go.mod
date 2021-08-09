@@ -1,3 +1,3 @@
-module alpnmitm
+module alpnpass
 
 go 1.14
