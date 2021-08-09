@@ -1,0 +1,7 @@
+alpnmitm
+go.sum
+*.crt
+*.key
+*.pem
+*.json
+!alpnmitm.json
