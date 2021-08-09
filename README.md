@@ -14,7 +14,7 @@ Usage
 -----
 
 ```
-./alpnpass \[alpnpass.json]
+./alpnpass [alpnpass.json]
 ```
 
 The alpnpass.json configuration file is currently the only way to configure this tool. You can specify any other filename of course. Here is an example with all default values:
