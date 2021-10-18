@@ -3,7 +3,7 @@ ALPN Pass
 
 This tool will listen on a given port, strip SSL encryption, forward traffic through a plain TCP proxy, then encrypt the returning traffic again and send it to the target of your choice. Unlike most SSL stripping solutions this tool will negotiate ALPN and preserve the negotiated protocol all the way to the target.
 
-The intended use of the tool is helping analyze SSL encrypted traffic in any app that uses ALPN to multiplex several protocols into one port. You will need something else to actually look at the traffic, such as [IO Ninja](https://ioninja.com/) with the TCP Proxy plugin for example.
+The intended use of the tool is helping analyze SSL encrypted traffic in any app that uses ALPN to multiplex several protocols into one port. You will need something else to actually look at the traffic, such as [IO Ninja](https://ioninja.com/) with the TCP Proxy plugin or [Wireshark](https://www.wireshark.org).
 
 Compiling
 ---------
@@ -104,6 +104,12 @@ For example, if you set the [IO Ninja](https://ioninja.com/) TCP proxy to listen
 
 ```
 client -> alpnpass (port 1111, SSL) -> IO Ninja (port 2222, plain) -> alpnpass (port 3333, plain) -> server (port 4444, SSL)
+```
+
+If you use a tool like [Wireshark](https://www.wireshark.org) which can monitor traffic without being part of the stream itself, you can set `InterceptPort` and `ReturnPort` to the same value (for example '5555') and sniff the traffic on that port on the `lo` loopback device:
+
+```
+client -> alpnpass (port 1111, SSL) -> alpnpass (port 5555, plain) -> server (port 4444, SSL)
 ```
 
 Limitations
